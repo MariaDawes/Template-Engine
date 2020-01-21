@@ -4,9 +4,10 @@ const inquirer = require("inquirer");
 //const Engineer = require("./engineer");
 //const Intern = require("./intern");
 // const generateHTML = require("./generateHTML");
-
-
-
+let ansmei = "";
+let i = 0;
+// var anwersArray = [""];
+// var ansmeiArray = [""];
 
 function init() {
 
@@ -44,6 +45,7 @@ function init() {
             console.log("id:", ans.id);
             console.log("email:", ans.email);
             console.log("title:", ans.title);
+            
 
         
             if (ans.title == "manager") {
@@ -59,11 +61,13 @@ function init() {
                     ])
                     .then(ans1 => {
                         console.log("office number:", ans1.officenumber);
-                        anotherEmployee();
+                        ansmei = ans1.officenumber
+                        console.log("office number:", ansmei);
+                        anotherEmployee(ans, ansmei);
                     })
             } else if (ans.title == "engineer") {
 
-                    inquirer
+                inquirer
                     .prompt([
                         {
                             type: "input",
@@ -74,12 +78,13 @@ function init() {
                     ])
                     .then(ans2 => {
                         console.log("Git hub profile:", ans2.githubprofile);
-                        anotherEmployee();
+                        ansmei = ans2.githubprofile
+                        anotherEmployee(ans, ansmei);
                     })
                 
             } else if (ans.title == "intern") {
 
-                    inquirer
+                inquirer
                     .prompt([
                         {
                             type: "input",
@@ -90,7 +95,8 @@ function init() {
                     ])
                     .then(ans3 => {
                         console.log("Git hub profile:", ans3.school);
-                        anotherEmployee();
+                        ansmei = ans3.school
+                        anotherEmployee(ans, ansmei);
                     })
 
             } // end of ifs
@@ -128,7 +134,7 @@ function init() {
         }
         // end of Input validation functions 
 
-        function anotherEmployee() {
+        function anotherEmployee(ans, ansmei) {
             console.log("Another employee");
 
             inquirer
@@ -141,22 +147,40 @@ function init() {
                 }
             ])
             .then(ans4 => {
+                
                 console.log("Yes or No?", ans4.another);
+               
                 if (ans4.another == "Yes") {
-                    storeData();
+                    //console.log("both ans and ansmei:", ans, ansmei);
+                    storeData(ans, ansmei);
                     init();    
                 } 
                 else {
-                console.log("Your html will be ready soon!");
-                storeData();
-                doHtml();
+                    //console.log("both ans and ansmei:", ans, ansmei);
+                    storeData(ans, ansmei);
+                    doHtml();
                 }
             })
         }
 
-        function storeData() {
+        function storeData(ans, ansmei) {
             console.log("Store data!");
-        }
+            console.log(ans.name);
+            console.log(ans.id);
+            console.log(ans.email);
+            console.log(ans.title);
+            console.log(ansmei);
+
+            // anwersArray[i] = ans;
+            // ansmeiArray[i] = ansmei;
+
+
+            // console.log("answersArray: ", answersArray[i]);
+            // console.log("answersArray: ", answersArray[i]);
+
+            i++
+            
+         }
        
         function doHtml() {
             console.log("Do html!");
