@@ -6,8 +6,8 @@ const inquirer = require("inquirer");
 // const generateHTML = require("./generateHTML");
 let ansmei = "";
 let i = 0;
-// var anwersArray = [""];
-// var ansmeiArray = [""];
+var answersArray = [""];
+var ansmeiArray = [""];
 
 function init() {
 
@@ -171,16 +171,16 @@ function init() {
             console.log(ans.title);
             console.log(ansmei);
 
-            // anwersArray[i] = ans;
-            // ansmeiArray[i] = ansmei;
+            answersArray[i] = ans;
+            ansmeiArray[i] = ansmei;
 
 
-            // console.log("answersArray: ", answersArray[i]);
-            // console.log("answersArray: ", answersArray[i]);
+            console.log("answersArray: ", answersArray[i]);
+            console.log("ansmeiArray: ", ansmeiArray[i]);
 
             i++
             
-         }
+        }
        
         function doHtml() {
             console.log("Do html!");
