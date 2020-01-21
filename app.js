@@ -149,15 +149,16 @@ function init() {
             .then(ans4 => {
                 
                 console.log("Yes or No?", ans4.another);
-               
+                storeData(ans, ansmei);
+
                 if (ans4.another == "Yes") {
                     //console.log("both ans and ansmei:", ans, ansmei);
-                    storeData(ans, ansmei);
+                   //storeData(ans, ansmei);
                     init();    
                 } 
                 else {
                     //console.log("both ans and ansmei:", ans, ansmei);
-                    storeData(ans, ansmei);
+                    //storeData(ans, ansmei);
                     doHtml();
                 }
             })
@@ -173,8 +174,10 @@ function init() {
 
             answersArray[i] = ans;
             ansmeiArray[i] = ansmei;
-
-
+            
+            
+            
+            console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii : ", i);
             console.log("answersArray: ", answersArray[i]);
             console.log("ansmeiArray: ", ansmeiArray[i]);
 
