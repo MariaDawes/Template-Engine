@@ -149,20 +149,19 @@ function init() {
             .then(ans4 => {
                 
                 console.log("Yes or No?", ans4.another);
+                
                 storeData(ans, ansmei);
 
                 if (ans4.another == "Yes") {
-                    //console.log("both ans and ansmei:", ans, ansmei);
-                   //storeData(ans, ansmei);
                     init();    
                 } 
                 else {
-                    //console.log("both ans and ansmei:", ans, ansmei);
-                    //storeData(ans, ansmei);
-                    doHtml();
+                                  
+                   console.log("chose no - so html");
+                    // doHtml
                 }
             })
-        }
+        } // end anotherEmployee function
 
         function storeData(ans, ansmei) {
             console.log("Store data!");
@@ -183,12 +182,10 @@ function init() {
 
             i++
             
-        }
+            
+        } //end function storeData
        
-        function doHtml() {
-            console.log("Do html!");
-        }
-
+        
 
 
                     
