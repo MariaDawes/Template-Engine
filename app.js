@@ -8,6 +8,7 @@ let ansmei = "";
 let i = 0;
 var answersArray = [""];
 var ansmeiArray = [""];
+let managerjustOne = true;
 
 function init() {
 
@@ -46,62 +47,78 @@ function init() {
             console.log("email:", ans.email);
             console.log("title:", ans.title);
             
+            
 
-        
-            if (ans.title == "manager") {
+                if (ans.title == "manager") {
+
+                    if (managerjustOne === true) {
+
+                        managerjustOne = false;
+                        inquirer
+                            .prompt([
+                            {
+                                type: "input",
+                                name: "officenumber",
+                                message: "What is the employee's office number?",
+                                validate: validateNumber
+                            }
+                            ])
+                            .then(ans1 => {
+                                console.log("office number:", ans1.officenumber);
+                                ansmei = ans1.officenumber
+                                console.log("office number:", ansmei);
+                                anotherEmployee(ans, ansmei);
+                            })
+
+                    } else {
+                        console.log("Only one manager is allowed in the group. Please enter another type of employer");
+                        init();
+                    } // end of managerjustOne if/else
+
+                } else if (ans.title == "engineer") {
 
                     inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "officenumber",
-                            message: "What is the employee's office number?",
-                            validate: validateNumber
-                        }
-                    ])
-                    .then(ans1 => {
-                        console.log("office number:", ans1.officenumber);
-                        ansmei = ans1.officenumber
-                        console.log("office number:", ansmei);
-                        anotherEmployee(ans, ansmei);
-                    })
-            } else if (ans.title == "engineer") {
+                        .prompt([
+                            {
+                                type: "input",
+                                name: "githubprofile",
+                                message: "What is the employee's GitHub profile?",
+                                validate: validateGithub
+                            }
+                        ])
+                        .then(ans2 => {
+                            console.log("Git hub profile:", ans2.githubprofile);
+                            ansmei = ans2.githubprofile
+                            anotherEmployee(ans, ansmei);
+                        })
+                    
+                } else if (ans.title == "intern") {
 
-                inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "githubprofile",
-                            message: "What is the employee's GitHub profile?",
-                            validate: validateGithub
-                        }
-                    ])
-                    .then(ans2 => {
-                        console.log("Git hub profile:", ans2.githubprofile);
-                        ansmei = ans2.githubprofile
-                        anotherEmployee(ans, ansmei);
-                    })
-                
-            } else if (ans.title == "intern") {
+                    inquirer
+                        .prompt([
+                            {
+                                type: "input",
+                                name: "school",
+                                message: "What is the employee's school name?",
+                                validate: validateName
+                            }
+                        ])
+                        .then(ans3 => {
+                            console.log("Git hub profile:", ans3.school);
+                            ansmei = ans3.school
+                            anotherEmployee(ans, ansmei);
+                        })
 
-                inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "school",
-                            message: "What is the employee's school name?",
-                            validate: validateName
-                        }
-                    ])
-                    .then(ans3 => {
-                        console.log("Git hub profile:", ans3.school);
-                        ansmei = ans3.school
-                        anotherEmployee(ans, ansmei);
-                    })
+                } // end of ifs
 
-            } // end of ifs
+
+            
+        
+            
                     
         }) // end of .then
+
+
 
         // Input validation functions    
         function validateName(input) {
@@ -133,6 +150,7 @@ function init() {
         }
         }
         // end of Input validation functions 
+
 
         function anotherEmployee(ans, ansmei) {
             console.log("Another employee");
