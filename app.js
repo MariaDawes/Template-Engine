@@ -104,7 +104,7 @@ function init() {
                             }
                         ])
                         .then(ans3 => {
-                            console.log("Git hub profile:", ans3.school);
+                            console.log("School name:", ans3.school);
                             ansmei = ans3.school
                             anotherEmployee(ans, ansmei);
                         })
@@ -153,78 +153,56 @@ function init() {
 
 
         function anotherEmployee(ans, ansmei) {
-            console.log("Another employee");
 
             inquirer
             .prompt([
                 {
                     type: "list",
-                    name: "another",
-                    message: "Do you want to add another employee?",
-                    choices: ["Yes", "No"] 
+                    name: "whattodo",
+                    message: "What to do next?",
+                    choices: ["Add another employee", "Print HTML", "Exit program"] 
                 }
             ])
             .then(ans4 => {
                 
-                console.log("Yes or No?", ans4.another);
-                
                 storeData(ans, ansmei);
+                console.log(answersArray[1]);
+                console.log(ansmeiArray[1]);
+               
+                if (ans4.whattodo == "Add another employee") {
+                    init();  
+                }                
+                else if (ans4.whattodo == "Print HTML") {
+                    console.log("$$$$$ html ******");
+                    // const mei = "";
 
-                if (ans4.another == "Yes") {
-                    init();    
+
+                    // if (answersArray.title == "manager") {
+                    //      mei = ansmeiArray[a];
+                    //  }
+                    //  answersArray[i] = ans;
+                    //  ansmeiArray[i] = ansmei;
+                    
+                    
+
+                    // var filehtml = generateHTML({ ...answers, starsUsers, ...response.data });
+                   
+
+                     
+
                 } 
-                else {
-                                  
-                   console.log("chose no - so html");
-                    // doHtml
+                else if (ans4.whattodo == "Add another employee") {
+                    console.log("Thank for using the app! Goodbye!");
+
                 }
-            })
+            }) // end inquire prompt/then
         } // end anotherEmployee function
 
         function storeData(ans, ansmei) {
-            console.log("Store data!");
-            console.log(ans.name);
-            console.log(ans.id);
-            console.log(ans.email);
-            console.log(ans.title);
-            console.log(ansmei);
-
             answersArray[i] = ans;
             ansmeiArray[i] = ansmei;
-            
-            
-            
-            console.log("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii : ", i);
-            console.log("answersArray: ", answersArray[i]);
-            console.log("ansmeiArray: ", ansmeiArray[i]);
-
             i++
-            
-            
         } //end function storeData
-       
-        
-
-
-                    
-//                     // Get the response axios sent and set varibles to support pdf file generation
-//                     var color = answers.color
-//                     var starsUsers = 0
-//                     var filehtml = generateHTML({ ...answers, starsUsers, ...response.data })
-//                     const options = { format: 'Letter' };
-
-//                     // Generate pdf file
-//                     pdf.create(filehtml, options).toFile('./generateHTML.pdf', function (err, res) {
-//                         if (err) return console.log(err);
-//                         console.log(res);
-//                     })
-//                 })
-//                 .catch(function (error) {
-//                     // handle error
-//                     console.log(error);
-//                 })
-
-
         
 } // end function init
 
