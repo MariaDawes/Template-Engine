@@ -42,13 +42,6 @@ function init() {
         ])
         .then(ans => {
             
-            console.log("name:", ans.name);
-            console.log("id:", ans.id);
-            console.log("email:", ans.email);
-            console.log("title:", ans.title);
-            
-            
-
                 if (ans.title == "manager") {
 
                     if (managerjustOne === true) {
@@ -64,14 +57,12 @@ function init() {
                             }
                             ])
                             .then(ans1 => {
-                                console.log("office number:", ans1.officenumber);
-                                ansmei = ans1.officenumber
-                                console.log("office number:", ansmei);
+                                ansmei = ans1.officenumber;
                                 anotherEmployee(ans, ansmei);
                             })
 
                     } else {
-                        console.log("Only one manager is allowed in the group. Please enter another type of employer");
+                        console.log("Only one manager, please... otherwise too many chiefs!!!");
                         init();
                     } // end of managerjustOne if/else
 
@@ -87,7 +78,6 @@ function init() {
                             }
                         ])
                         .then(ans2 => {
-                            console.log("Git hub profile:", ans2.githubprofile);
                             ansmei = ans2.githubprofile
                             anotherEmployee(ans, ansmei);
                         })
@@ -104,20 +94,12 @@ function init() {
                             }
                         ])
                         .then(ans3 => {
-                            console.log("School name:", ans3.school);
                             ansmei = ans3.school
                             anotherEmployee(ans, ansmei);
                         })
-
                 } // end of ifs
-
-
-            
-        
-            
-                    
+       
         }) // end of .then
-
 
 
         // Input validation functions    
@@ -166,30 +148,39 @@ function init() {
             .then(ans4 => {
                 
                 storeData(ans, ansmei);
-                console.log(answersArray[1]);
-                console.log(ansmeiArray[1]);
-               
+                               
                 if (ans4.whattodo == "Add another employee") {
                     init();  
                 }                
                 else if (ans4.whattodo == "Print HTML") {
-                    console.log("$$$$$ html ******");
-                    // const mei = "";
+                   
+                    var a;
+                    console.log("array length: ", ansmeiArray.length);
+         
+                    for (a = 0; a < ansmeiArray.length; a++) {
+                        console.log(answersArray[a]);
+                        console.log("Office/Git/School: ", ansmeiArray[a]);
+                    }
 
+                    for (a = 0; a < ansmeiArray.length; a++) {
+                        
+                        if (answersArray[a].title == "manager") {
+                            ansmeiArray[a] = 'Office number: ' + ansmeiArray[a];
+                            console.log(ansmeiArray[a]);
+                        } 
+                        else if (answersArray[a].title == "engineer") {
+                            ansmeiArray[a] = 'Github Profile: ' + ansmeiArray[a];
+                            console.log(ansmeiArray[a]);
+                        }
+                        else if (answersArray[a].title == "intern") {
+                            ansmeiArray[a] = 'School: ' + ansmeiArray[a];
+                            console.log(ansmeiArray[a]);
+                        }
 
-                    // if (answersArray.title == "manager") {
-                    //      mei = ansmeiArray[a];
-                    //  }
-                    //  answersArray[i] = ans;
-                    //  ansmeiArray[i] = ansmei;
-                    
-                    
-
+                    } //end for loop
+               
                     // var filehtml = generateHTML({ ...answers, starsUsers, ...response.data });
                    
-
-                     
-
                 } 
                 else if (ans4.whattodo == "Add another employee") {
                     console.log("Thank for using the app! Goodbye!");
