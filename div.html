@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+  <html lang="en">
+     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"/>
+        <link href="https://fonts.googleapis.com/css?family=BioRhyme|Cabin&display=swap" rel="stylesheet">
+        <title>DocumentDIV</title>
+        <style>
+           h1, h2, h3, h4, h5, h6 {
+           font-family: Cormorant SC;
+           margin: 0;
+           }
+           h1 {
+           font-size: 3em;
+           }
+           h2 {
+           font-size: 2.5em;
+           }
+           h3 {
+           font-size: 2em;
+           }
+           h4 {
+           font-size: 1.5em;
+           }
+           h5 {
+           font-size: 1.3em;
+           }
+           h6 {
+           font-size: 1.2em;
+           }
+           
+           .container {
+           padding: 50px;
+           padding-left: 100px;
+           padding-right: 100px;
+           }
+           .row {
+             display: flex;
+             flex-wrap: nowrap;
+             justify-content: space-between;
+             margin-top: 20px;
+             margin-bottom: 20px;
+           }
+           .card {
+             padding: 20px;
+             border-radius: 6px;
+             background-color: blue;
+             color: white;
+             margin: 20px;
+           }
+           .col {
+           flex: 1;
+           text-align: center;
+           } 
+           
+        </style>
+     </head>
+     <body>
+                  <div class="row">
+                    <div class="col card">
+
+                             <h1>${answersArray.name}</h1>
+                             <h3>${answersArray.title}</h3>
+                             <h5>${answersArray.id}</h5>
+                             <h5>${answersArray.email}</h5>
+                             <h5>${answersArray.mei}</h5>
+                             
+                  </div>
+                </div>
+     </body>
+  
+</html>

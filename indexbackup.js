@@ -1,13 +1,15 @@
 const inquirer = require("inquirer");
-//const Employee = require("./employee");
-//const Manager = require("./manager");
-//const Engineer = require("./engineer");
-//const Intern = require("./intern");
-// const generateHTML = require("./generateHTML");
+const fs = require("fs");
+//const path = require("path");
+//const generateHTML = require("./generateHTML");
+
+
+
 let ansmei = "";
 let i = 0;
 var answersArray = [""];
 var ansmeiArray = [""];
+let managerjustOne = true;
 
 function init() {
 
@@ -41,67 +43,65 @@ function init() {
         ])
         .then(ans => {
             
-            console.log("name:", ans.name);
-            console.log("id:", ans.id);
-            console.log("email:", ans.email);
-            console.log("title:", ans.title);
-            
+                if (ans.title == "manager") {
 
-        
-            if (ans.title == "manager") {
+                    if (managerjustOne === true) {
+
+                        managerjustOne = false;
+                        inquirer
+                            .prompt([
+                            {
+                                type: "input",
+                                name: "officenumber",
+                                message: "What is the employee's office number?",
+                                validate: validateNumber
+                            }
+                            ])
+                            .then(ans1 => {
+                                ansmei = ans1.officenumber;
+                                anotherEmployee(ans, ansmei);
+                            })
+
+                    } else {
+                        console.log("Only one manager, please... otherwise too many chiefs!!!");
+                        init();
+                    } // end of managerjustOne if/else
+
+                } else if (ans.title == "engineer") {
 
                     inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "officenumber",
-                            message: "What is the employee's office number?",
-                            validate: validateNumber
-                        }
-                    ])
-                    .then(ans1 => {
-                        console.log("office number:", ans1.officenumber);
-                        ansmei = ans1.officenumber
-                        console.log("office number:", ansmei);
-                        anotherEmployee(ans, ansmei);
-                    })
-            } else if (ans.title == "engineer") {
-
-                inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "githubprofile",
-                            message: "What is the employee's GitHub profile?",
-                            validate: validateGithub
-                        }
-                    ])
-                    .then(ans2 => {
-                        console.log("Git hub profile:", ans2.githubprofile);
-                        ansmei = ans2.githubprofile
-                        anotherEmployee(ans, ansmei);
-                    })
-                
-            } else if (ans.title == "intern") {
-
-                inquirer
-                    .prompt([
-                        {
-                            type: "input",
-                            name: "school",
-                            message: "What is the employee's school name?",
-                            validate: validateName
-                        }
-                    ])
-                    .then(ans3 => {
-                        console.log("Git hub profile:", ans3.school);
-                        ansmei = ans3.school
-                        anotherEmployee(ans, ansmei);
-                    })
-
-            } // end of ifs
+                        .prompt([
+                            {
+                                type: "input",
+                                name: "githubprofile",
+                                message: "What is the employee's GitHub profile?",
+                                validate: validateGithub
+                            }
+                        ])
+                        .then(ans2 => {
+                            ansmei = ans2.githubprofile
+                            anotherEmployee(ans, ansmei);
+                        })
                     
+                } else if (ans.title == "intern") {
+
+                    inquirer
+                        .prompt([
+                            {
+                                type: "input",
+                                name: "school",
+                                message: "What is the employee's school name?",
+                                validate: validateName
+                            }
+                        ])
+                        .then(ans3 => {
+                            ansmei = ans3.school
+                            anotherEmployee(ans, ansmei);
+                        })
+                } // end of ifs
+       
         }) // end of .then
+
 
         // Input validation functions    
         function validateName(input) {
@@ -134,79 +134,106 @@ function init() {
         }
         // end of Input validation functions 
 
+
         function anotherEmployee(ans, ansmei) {
-            console.log("Another employee");
 
             inquirer
             .prompt([
                 {
                     type: "list",
-                    name: "another",
-                    message: "Do you want to add another employee?",
-                    choices: ["Yes", "No"] 
+                    name: "whattodo",
+                    message: "What to do next?",
+                    choices: ["Add another employee", "Print HTML", "Exit program"] 
                 }
             ])
             .then(ans4 => {
                 
-                console.log("Yes or No?", ans4.another);
+                storeData(ans, ansmei);
+                               
+                if (ans4.whattodo == "Add another employee") {
+                    init();  
+                }                
+                else if (ans4.whattodo == "Print HTML") {
+                   
+                    var a;
+                    console.log("array length: ", ansmeiArray.length);
+         
+                    for (a = 0; a < ansmeiArray.length; a++) {
+                        console.log(answersArray[a]);
+                        console.log("Office/Git/School: ", ansmeiArray[a]);
+                    }
+
+                    for (a = 0; a < ansmeiArray.length; a++) {
+                        
+                        if (answersArray[a].title == "manager") {
+                            var ansmeicomplete = 'Office number: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log("teste se tem ansmei nesse array", answersArray[a]);
+                        } 
+                        else if (answersArray[a].title == "engineer") {
+                            var ansmeicomplete = 'Github Profile: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log("teste se tem ansmei nesse array", answersArray[a]);
+                        }
+                        else if (answersArray[a].title == "intern") {
+                            var ansmeicomplete = 'School: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log("teste se tem ansmei nesse array", answersArray[a]);
+                        }
+
+                    } //end for loop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                
-                if (ans4.another == "Yes") {
-                    //console.log("both ans and ansmei:", ans, ansmei);
-                    storeData(ans, ansmei);
-                    init();    
-                } 
-                else {
-                    //console.log("both ans and ansmei:", ans, ansmei);
-                    storeData(ans, ansmei);
-                    doHtml();
+                    //var filehtml = generateHTML();
+
+                    // for (i = 0; i < answersArray.length; i++) {
+                        
+                    //     //console.log(answersArray[i]);
+                    //    //var filehtml = generateDIV(answersArray[i]);
+                    //    writetoFile();
+                    // }
+                    
+             
+                    // function writetoFile() {
+                    //     fs.writeFile(outputPath, render(answersArray), "utf-8", function(err){
+                    //         if(err){
+                    //             return console.log(err);
+                    //         }
+                    //     });
+                    // } 
                 }
-            })
-        }
+                else if (ans4.whattodo == "Add another employee") {
+                    console.log("Thank for using the app! Goodbye!");
+
+                }
+            
+            }) // end inquire prompt/then
+        } // end anotherEmployee function
 
         function storeData(ans, ansmei) {
-            console.log("Store data!");
-            console.log(ans.name);
-            console.log(ans.id);
-            console.log(ans.email);
-            console.log(ans.title);
-            console.log(ansmei);
-
             answersArray[i] = ans;
             ansmeiArray[i] = ansmei;
-
-
-            console.log("answersArray: ", answersArray[i]);
-            console.log("ansmeiArray: ", ansmeiArray[i]);
-
             i++
-            
-        }
-       
-        function doHtml() {
-            console.log("Do html!");
-        }
-
-
-
-                    
-//                     // Get the response axios sent and set varibles to support pdf file generation
-//                     var color = answers.color
-//                     var starsUsers = 0
-//                     var filehtml = generateHTML({ ...answers, starsUsers, ...response.data })
-//                     const options = { format: 'Letter' };
-
-//                     // Generate pdf file
-//                     pdf.create(filehtml, options).toFile('./generateHTML.pdf', function (err, res) {
-//                         if (err) return console.log(err);
-//                         console.log(res);
-//                     })
-//                 })
-//                 .catch(function (error) {
-//                     // handle error
-//                     console.log(error);
-//                 })
-
-
+        } //end function storeData
         
 } // end function init
 

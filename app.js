@@ -1,9 +1,9 @@
 const inquirer = require("inquirer");
-//const Employee = require("./employee");
-//const Manager = require("./manager");
-//const Engineer = require("./engineer");
-//const Intern = require("./intern");
-// const generateHTML = require("./generateHTML");
+const fs = require("fs");
+
+
+
+
 let ansmei = "";
 let i = 0;
 var answersArray = [""];
@@ -155,37 +155,50 @@ function init() {
                 else if (ans4.whattodo == "Print HTML") {
                    
                     var a;
-                    console.log("array length: ", ansmeiArray.length);
-         
-                    for (a = 0; a < ansmeiArray.length; a++) {
-                        console.log(answersArray[a]);
-                        console.log("Office/Git/School: ", ansmeiArray[a]);
-                    }
-
+                             
                     for (a = 0; a < ansmeiArray.length; a++) {
                         
                         if (answersArray[a].title == "manager") {
-                            ansmeiArray[a] = 'Office number: ' + ansmeiArray[a];
-                            console.log(ansmeiArray[a]);
+                            var ansmeicomplete = 'Office number: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log(answersArray[a]);
                         } 
                         else if (answersArray[a].title == "engineer") {
-                            ansmeiArray[a] = 'Github Profile: ' + ansmeiArray[a];
-                            console.log(ansmeiArray[a]);
+                            var ansmeicomplete = 'Github Profile: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log(answersArray[a]);
                         }
                         else if (answersArray[a].title == "intern") {
-                            ansmeiArray[a] = 'School: ' + ansmeiArray[a];
-                            console.log(ansmeiArray[a]);
+                            var ansmeicomplete = 'School: ' + ansmeiArray[a];
+                            answersArray[a].mei = ansmeicomplete;
+                            console.log(answersArray[a]);
                         }
 
                     } //end for loop
-               
-                    // var filehtml = generateHTML({ ...answers, starsUsers, ...response.data });
+
+                    
+                           
+                    fs.writeFile(`new.html`, answersArray[0], function(err){
+                        if(err){
+                            return console.log(err);
+                        }
+                    });
                    
-                } 
+                    for (i = 1; i < answersArray.length; i++) {
+                        
+                        fs.appendFile(`new.html`, answersArray[0], function(err){
+                            if(err){
+                                return console.log(err);
+                            }
+                        });
+                    
+                    }
+                }
                 else if (ans4.whattodo == "Add another employee") {
                     console.log("Thank for using the app! Goodbye!");
 
                 }
+            
             }) // end inquire prompt/then
         } // end anotherEmployee function
 
