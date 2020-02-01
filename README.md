@@ -16,8 +16,10 @@ The software will run in any Laptop, iPad and phone.
 
 * Prompt and results Screenshots
 
-![alt tag](https://mariadawes.github.io/Updatedportfoliopage/html1.png)
-![alt tag](https://mariadawes.github.io/Updatedportfoliopage/html2.png)
+
+![alt text](./HTML1.png "Password Generator Result")
+
+![alt text](./HTML2.png "Password Generator Result")
 
 
 # Tests 
