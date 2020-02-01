@@ -11,15 +11,14 @@ The software will run in any Laptop, iPad and phone.
 
 # Results 
 
-* Prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
+Prompt the user for their email, id, and specific information based on their role with the company. For instance, an intern may provide their school, whereas an engineer may provide their GitHub username.
 
 
-* Prompt and results Screenshots
+# Screenshots
 
+![alt text](./p1.png "Prompts")
 
-![alt text](./html1.png "Prompts")
-
-![alt text](./html2.png "Results")
+![alt text](./r2.png "Results")
 
 
 # Tests 
