@@ -17,9 +17,9 @@ The software will run in any Laptop, iPad and phone.
 * Prompt and results Screenshots
 
 
-![alt text](./HTML1.png "Prompts")
+![alt text](./html1.png "Prompts")
 
-![alt text](./HTML2.png "Results")
+![alt text](./html2.png "Results")
 
 
 # Tests 
